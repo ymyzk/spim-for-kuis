@@ -119,6 +119,7 @@ bool mapped_io;                 /* => activate memory-mapped IO */
 int pipe_out;
 int spim_return_value;          /* Value returned when spim exits */
 bool show_stats;                /* => show execution stats */
+bool show_instructions;         /* => show executed instructions */
 
 /* Local variables: */
 
@@ -153,6 +154,7 @@ main (int argc, char **argv)
   assemble = false;
   spim_return_value = 0;
   show_stats = false;
+  show_instructions = false;
 
   /* Input comes directly (not through stdio): */
   console_in.i = 0;
@@ -169,8 +171,8 @@ main (int argc, char **argv)
       if (argv [i][0] == '/') { argv [i][0] = '-'; }
 #endif
 
-      if (streq (argv [i], "-show_stats"))
-      { show_stats = true; }
+      if (streq (argv [i], "-show_stats")) { show_stats = true; }
+      else if (streq (argv [i], "-show_instructions")) { show_instructions = true; }
       else if (streq (argv [i], "-asm")
           || streq (argv [i], "-a"))
         {
@@ -311,7 +313,8 @@ main (int argc, char **argv)
         -assemble               Write assembled code to standard output\n\
         -dump                   Write user data and text segments into files\n\
         -full_dump              Write user and kernel data and text into files.\n\
-        -show_stats             Show execution stats.\n");
+        -show_stats             Show execution stats.\n\
+        -show_instructions      Show executed instructions.\n");
     }
 
 
@@ -352,7 +355,7 @@ main (int argc, char **argv)
                  write_output (message_out, "\n");
                  free (undefs);
                }
-             run_program (find_symbol_address (DEFAULT_RUN_LOCATION), DEFAULT_RUN_STEPS, false, false, &continuable);
+             run_program (find_symbol_address (DEFAULT_RUN_LOCATION), DEFAULT_RUN_STEPS, show_instructions, false, &continuable);
            }
          console_to_spim ();
        }
