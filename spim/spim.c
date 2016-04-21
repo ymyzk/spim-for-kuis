@@ -118,6 +118,7 @@ port message_out, console_out, console_in;
 bool mapped_io;                 /* => activate memory-mapped IO */
 int pipe_out;
 int spim_return_value;          /* Value returned when spim exits */
+bool show_stats;                /* => show execution stats */
 
 /* Local variables: */
 
@@ -151,6 +152,7 @@ main (int argc, char **argv)
   quiet = false;
   assemble = false;
   spim_return_value = 0;
+  show_stats = false;
 
   /* Input comes directly (not through stdio): */
   console_in.i = 0;
@@ -166,7 +168,10 @@ main (int argc, char **argv)
 #ifdef WIN32
       if (argv [i][0] == '/') { argv [i][0] = '-'; }
 #endif
-      if (streq (argv [i], "-asm")
+
+      if (streq (argv [i], "-show_stats"))
+      { show_stats = true; }
+      else if (streq (argv [i], "-asm")
           || streq (argv [i], "-a"))
         {
           bare_machine = false;
@@ -305,7 +310,8 @@ main (int argc, char **argv)
         -file <file> <args>     Assembly code file and arguments to program\n\
         -assemble               Write assembled code to standard output\n\
         -dump                   Write user data and text segments into files\n\
-        -full_dump              Write user and kernel data and text into files.\n");
+        -full_dump              Write user and kernel data and text into files.\n\
+        -show_stats             Show execution stats.\n");
     }
 
 

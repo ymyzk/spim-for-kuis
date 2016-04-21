@@ -178,7 +178,12 @@ static int running_in_delay_slot = 0;
 		    delayed_load_addr1 = NULL;			\
 		   }
 
-
+
+void print_stats(int number_of_instructions) {
+	char message[32];
+	sprintf(message, "# of executed instructions: %d\n", number_of_instructions);
+	write_output(message_out, message);
+}
 
 /* Run the program stored in memory, starting at address PC for
    STEPS_TO_RUN instruction executions.  If flag DISPLAY is true, print
@@ -192,6 +197,8 @@ run_spim (mem_addr initial_PC, int steps_to_run, bool display)
   static reg_word *delayed_load_addr1 = NULL, delayed_load_value1;
   static reg_word *delayed_load_addr2 = NULL, delayed_load_value2;
   int step, step_size, next_step;
+	/* Number of instructions fetched in this function */
+	int instruction_counter = 0;
 
   PC = initial_PC;
   if (!bare_machine && mapped_io)
@@ -279,6 +286,8 @@ run_spim (mem_addr initial_PC, int steps_to_run, bool display)
 
 	  if (display)
 	    print_inst (PC);
+
+		instruction_counter += 1;
 
 #ifdef TEST_ASM
 	  test_assembly (inst);
@@ -1100,11 +1109,14 @@ run_spim (mem_addr initial_PC, int steps_to_run, bool display)
 	    case Y_SYNC_OP:
 	      break;		/* Memory details not implemented */
 
-	    case Y_SYSCALL_OP:
-	      if (!do_syscall ())
-		return false;
-	      break;
-
+				case Y_SYSCALL_OP:
+		      if (!do_syscall ()) {
+						if (show_stats) {
+							print_stats(instruction_counter);
+						}
+						return false;
+					}
+	        break;
 	    case Y_TEQ_OP:
 	      if (R[RS (inst)] == R[RT (inst)])
 		RAISE_EXCEPTION(ExcCode_Tr, {});
@@ -1642,6 +1654,10 @@ run_spim (mem_addr initial_PC, int steps_to_run, bool display)
 	    }
 	}			/* End: for (step = 0; ... */
     }				/* End: for ( ; steps_to_run > 0 ... */
+
+  if (show_stats) {
+    print_stats(instruction_counter);
+  }
 
   /* Executed enought steps, return, but are able to continue. */
   return true;
