@@ -1,0 +1,12 @@
+language: c
+matrix:
+  include:
+    - os: linux
+      compiler: clang
+    - os: linux
+      compiler: gcc
+    - os: osx
+script:
+  - cd spim
+  - make
+  - make test

@@ -1,4 +1,7 @@
 # spim-for-kuis
+
+[![Build Status](https://travis-ci.org/ymyzk/spim-for-kuis.svg?branch=master)](https://travis-ci.org/ymyzk/spim-for-kuis)
+
 Fork of [SPIM](http://spimsimulator.sourceforge.net) for KUIS.
 
 ## Build & Run
