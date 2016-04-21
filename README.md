@@ -1,5 +1,5 @@
 # spim-for-kuis
-Fork of SPIM -- an assembly language MIPS32 simulator for KUIS.
+Fork of [SPIM](http://spimsimulator.sourceforge.net) for KUIS.
 
 ## Build & Run
 ```shell
