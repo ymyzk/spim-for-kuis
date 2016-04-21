@@ -63,16 +63,16 @@ TEST_DIR = ../Tests
 # Path of directory that contains documentation:
 DOC_DIR = ../Documentation
 
-
+DEST_DIR = ./build
 
 # Full path for the directory that will hold the executable files:
-BIN_DIR = $(DESTDIR)/usr/bin
+BIN_DIR = $(DEST_DIR)/bin
 
 # Full path for the directory that will hold the exception handler:
-EXCEPTION_DIR = $(DESTDIR)/usr/share/spim
+EXCEPTION_DIR = $(DEST_DIR)/share/spim
 
 # Full path for the directory that will hold the man files:
-MAN_DIR = $(DESTDIR)/usr/share/man/man1
+MAN_DIR = $(DEST_DIR)/share/man/man1
 
 
 # If you have flex, use it instead of lex.  If you use flex, define this
@@ -184,6 +184,7 @@ clean:
 	rm -f spim spim.exe *.o TAGS test.out lex.yy.c parser_yacc.c parser_yacc.h y.output
 
 install: spim
+	mkdir -p $(BIN_DIR)
 	install spim $(BIN_DIR)/spim
 	install -d $(EXCEPTION_DIR)
 	install -m 0444 $(CPU_DIR)/exceptions.s $(EXCEPTION_DIR)/exceptions.s
