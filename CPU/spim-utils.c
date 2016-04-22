@@ -50,6 +50,7 @@
 #include "run.h"
 #include "sym-tbl.h"
 
+#include "stats.h"
 
 /* Internal functions: */
 
@@ -138,6 +139,8 @@ initialize_world (char* exception_file_names, bool print_message)
     }
   initialize_scanner (stdin);
   delete_all_breakpoints ();
+
+  stats_reset();
 }
 
 
@@ -358,6 +361,7 @@ run_program (mem_addr pc, int steps, bool display, bool cont_bkpt, bool* continu
 
   exception_occurred = 0;
   *continuable = run_spim (pc, steps, display);
+  if (show_stats) { stats_print(); }
   if (exception_occurred && CP0_ExCode == ExcCode_Bp)
   {
       /* Turn off EXL bit, so subsequent interrupts set EPC since the break is

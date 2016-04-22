@@ -80,6 +80,8 @@
 #include "parser_yacc.h"
 #include "data.h"
 
+#include "stats.h"
+
 
 /* Internal functions: */
 

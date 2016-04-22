@@ -62,6 +62,8 @@
 #include "syscall.h"
 #include "run.h"
 
+#include "stats.h"
+
 bool force_break = false;	/* For the execution env. to force an execution break */
 
 #ifdef _MSC_BUILD
@@ -178,13 +180,6 @@ static int running_in_delay_slot = 0;
 		    delayed_load_addr1 = NULL;			\
 		   }
 
-
-void print_stats(int number_of_instructions) {
-	char message[32];
-	sprintf(message, "# of executed instructions: %d\n", number_of_instructions);
-	write_output(message_out, message);
-}
-
 /* Run the program stored in memory, starting at address PC for
    STEPS_TO_RUN instruction executions.  If flag DISPLAY is true, print
    each instruction before it executes. Return true if program's
@@ -197,8 +192,6 @@ run_spim (mem_addr initial_PC, int steps_to_run, bool display)
   static reg_word *delayed_load_addr1 = NULL, delayed_load_value1;
   static reg_word *delayed_load_addr2 = NULL, delayed_load_value2;
   int step, step_size, next_step;
-	/* Number of instructions fetched in this function */
-	int instruction_counter = 0;
 
   PC = initial_PC;
   if (!bare_machine && mapped_io)
@@ -287,7 +280,7 @@ run_spim (mem_addr initial_PC, int steps_to_run, bool display)
 	  if (display)
 	    print_inst (PC);
 
-		instruction_counter += 1;
+    stats_record_instruction(PC);
 
 #ifdef TEST_ASM
 	  test_assembly (inst);
@@ -1111,9 +1104,6 @@ run_spim (mem_addr initial_PC, int steps_to_run, bool display)
 
 				case Y_SYSCALL_OP:
 		      if (!do_syscall ()) {
-						if (show_stats) {
-							print_stats(instruction_counter);
-						}
 						return false;
 					}
 	        break;
@@ -1654,10 +1644,6 @@ run_spim (mem_addr initial_PC, int steps_to_run, bool display)
 	    }
 	}			/* End: for (step = 0; ... */
     }				/* End: for ( ; steps_to_run > 0 ... */
-
-  if (show_stats) {
-    print_stats(instruction_counter);
-  }
 
   /* Executed enought steps, return, but are able to continue. */
   return true;

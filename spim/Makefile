@@ -124,7 +124,7 @@ LEXCFLAGS += -O $(CFLAGS)
 
 
 OBJS = spim.o spim-utils.o run.o mem.o inst.o data.o sym-tbl.o parser_yacc.o lex.yy.o \
-       syscall.o display-utils.o string-stream.o
+       syscall.o display-utils.o string-stream.o stats.o
 
 
 spim:   $(OBJS)
@@ -330,3 +330,4 @@ parser_yacc.o: $(CPU_DIR)/sym-tbl.h
 parser_yacc.o: $(CPU_DIR)/data.h
 parser_yacc.o: $(CPU_DIR)/scanner.h
 parser_yacc.o: $(CPU_DIR)/parser.h
+stats.o: $(CPU_DIR)/stats.h
