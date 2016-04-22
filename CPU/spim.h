@@ -219,6 +219,7 @@ typedef uint32 /*@alt int @*/ mem_addr;
 
 /* A port is either a Unix file descriptor (an int) or a FILE* pointer. */
 
+#include <stdbool.h>
 #include <stdio.h>
 
 typedef union {int i; FILE* f;} port;

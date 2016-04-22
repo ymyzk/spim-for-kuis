@@ -87,7 +87,7 @@
 
 static void console_to_program ();
 static void console_to_spim ();
-static void control_c_seen (int /*arg*/);
+static void control_c_seen (int arg);
 static void flush_to_newline ();
 static int get_opt_int ();
 static bool parse_spim_command (bool redo);
@@ -393,8 +393,9 @@ top_level ()
 
 
 static void
-control_c_seen (int /*arg*/)
+control_c_seen (int arg)
 {
+  (void)arg;
   console_to_spim ();
   write_output (message_out, "\nExecution interrupted\n");
   longjmp (spim_top_level_env, 1);

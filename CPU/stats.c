@@ -8,6 +8,7 @@ void stats_reset() {
 }
 
 void stats_record_instruction(mem_addr addr) {
+  (void)addr;
   stats.instructions_counter += 1;
   return;
 }
