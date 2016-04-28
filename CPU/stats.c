@@ -14,7 +14,7 @@ void stats_record_instruction(mem_addr addr) {
 }
 
 void stats_print() {
-  char message[32];
-	sprintf(message, "\n# of executed instructions: %d\n", stats.instructions_counter);
-	write_output(message_out, message);
+  char message[64];
+  snprintf(message, sizeof(message), "\n# of executed instructions: %d\n", stats.instructions_counter);
+  write_output(message_out, message);
 }
