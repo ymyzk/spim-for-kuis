@@ -36,7 +36,6 @@
 
 #include "spim.h"
 #include "string-stream.h"
-#include "spim-utils.h"
 #include "inst.h"
 #include "reg.h"
 #include "mem.h"
@@ -684,7 +683,6 @@ inst_to_string(mem_addr addr)
   return ss_to_string (&ss);
 }
 
-
 void
 format_an_inst (str_stream *ss, instruction *inst, mem_addr addr)
 {
@@ -707,9 +705,7 @@ format_an_inst (str_stream *ss, instruction *inst, mem_addr addr)
       return;
     }
 
-  entry = map_int_to_name_val_val (name_tbl,
-				   sizeof (name_tbl) / sizeof (name_val_val),
-				   OPCODE (inst));
+	entry = get_entry_for_inst(inst);
   if (entry == NULL)
     {
       ss_printf (ss, "<unknown instruction %d>\n", OPCODE (inst));
@@ -1635,4 +1631,16 @@ inst_cmp (instruction *inst1, instruction *inst2)
       format_an_inst (&ss, inst2, 0);
       ss_printf (&ss, "=================== Not Equal ===================\n");
     }
+}
+
+name_val_val*
+get_entry_for_inst (instruction *inst) {
+	return get_entry_for_opcode(OPCODE(inst));
+}
+
+name_val_val*
+get_entry_for_opcode (int opcode) {
+	return map_int_to_name_val_val (name_tbl,
+				   sizeof (name_tbl) / sizeof (name_val_val),
+				   opcode);
 }

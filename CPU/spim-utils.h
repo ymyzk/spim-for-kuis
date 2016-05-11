@@ -30,6 +30,8 @@
    OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#ifndef SPIM_UTILS_H
+#define SPIM_UTILS_H
 
 /* Triple containing a string and two integers.	 Used in tables
    mapping from a name to values. */
@@ -40,8 +42,6 @@ typedef struct
   int value1;
   int value2;
 } name_val_val;
-
-
 
 /* Exported functions: */
 
@@ -65,3 +65,5 @@ char *str_copy (char *str);
 void write_startup_message ();
 void *xmalloc (int);
 void *zmalloc (int);
+
+#endif

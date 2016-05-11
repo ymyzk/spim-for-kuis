@@ -30,6 +30,7 @@
    OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include "spim-utils.h"
 
 /* Represenation of the expression that produce a value for an instruction's
    immediate field.  Immediates have the form: label +/- offset. */
@@ -271,3 +272,6 @@ void text_begins_at_point (mem_addr addr);
 imm_expr *upper_bits_of_expr (imm_expr *old_expr);
 void user_kernel_text_segment (bool to_kernel);
 bool is_zero_imm (imm_expr *expr);
+
+name_val_val* get_entry_for_inst (instruction *inst);
+name_val_val* get_entry_for_opcode (int opcode);

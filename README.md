@@ -45,7 +45,22 @@ Example:
 $ ./build/bin/spim -show_stats -file ../helloworld.s
 Loaded: ./build/share/spim/exceptions.s
 Hello World
-# of executed instructions: 14
+--- Summary ---
+# of executed instructions
+- Total:    10
+- Memory:    2
+- Others:    8
+
+--- Details ---
+     addiu             2
+      addu             1
+       jal             1
+        jr             1
+       lui             1
+        lw             2
+       ori             2
+       sll             2
+   syscall             2
 ```
 
 ## License

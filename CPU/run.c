@@ -280,7 +280,7 @@ run_spim (mem_addr initial_PC, int steps_to_run, bool display)
 	  if (display)
 	    print_inst (PC);
 
-    stats_record_instruction(PC);
+    stats_record_instruction(inst);
 
 #ifdef TEST_ASM
 	  test_assembly (inst);
