@@ -112,7 +112,7 @@ MEM_SIZES = -DTEXT_SIZE=65536 -DDATA_SIZE=131072 -DK_TEXT_SIZE=65536
 DEFINES = $(MEM_SIZES) -DDEFAULT_EXCEPTION_HANDLER="\"$(EXCEPTION_DIR)/exceptions.s\""
 
 CC = gcc
-CFLAGS += -I. -I$(CPU_DIR) $(DEFINES) -O -g -Wall -pedantic -Wextra -Wunused -Wno-write-strings
+CFLAGS += -I. -I$(CPU_DIR) $(DEFINES) -std=c99 -O -g -Wall -pedantic -Wextra -Wunused -Wno-write-strings
 YCFLAGS +=
 LDFLAGS += -lm
 CSH = bash
