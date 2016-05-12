@@ -16,7 +16,7 @@ You can specify the installation directory with `DEST_DIR`:
 ```shell
 cd ./spim/
 make DEST_DIR=~/.local spim install
-./build/bin/spim
+~/.local/bin/spim
 ```
 
 ## Additional options
