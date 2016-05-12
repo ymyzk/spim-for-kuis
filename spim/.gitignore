@@ -1,0 +1,5 @@
+*.o
+*.yy.c
+*_yacc.c
+*_yacc.h
+spim
