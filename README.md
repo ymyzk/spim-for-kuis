@@ -74,6 +74,11 @@ Example: `[0x0040004c]    0x34080000  ori $8, $0, 0                   ; 15: li  
 
 Remark: Some instructions (e.g. `li`) are **pseudo instructions** which are translated into other instructions  (e.g. `ori`) on parsing.
 
+#### Color
+If your terminal supports [ANSI colors](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors), you can get colored output with `-color -show_instructions` option
+
+[![asciicast](https://asciinema.org/a/dn2b6fvghwj4fazkws10sqpxf.png)](https://asciinema.org/a/dn2b6fvghwj4fazkws10sqpxf)
+
 ### Show number of executed instructions
 You can see the number of executed instructions with `-show_stats` option.
 
