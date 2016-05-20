@@ -122,6 +122,7 @@ int pipe_out;
 int spim_return_value;          /* Value returned when spim exits */
 bool show_stats;                /* => show execution stats */
 bool show_instructions;         /* => show executed instructions */
+bool colored_output;            /* => show executed instructions with colors */
 
 /* Local variables: */
 
@@ -157,6 +158,7 @@ main (int argc, char **argv)
   spim_return_value = 0;
   show_stats = false;
   show_instructions = false;
+  colored_output = false;
 
   /* Input comes directly (not through stdio): */
   console_in.i = 0;
@@ -175,6 +177,7 @@ main (int argc, char **argv)
 
       if (streq (argv [i], "-show_stats")) { show_stats = true; }
       else if (streq (argv [i], "-show_instructions")) { show_instructions = true; }
+      else if (streq (argv [i], "-color")) { colored_output = true; }
       else if (streq (argv [i], "-asm")
           || streq (argv [i], "-a"))
         {

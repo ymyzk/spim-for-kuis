@@ -248,6 +248,7 @@ extern char *exception_file_name; /* File containing exception handler */
 extern bool force_break;          /* => stop interpreter loop  */
 extern bool parser_error_occurred; /* => parse resulted in error */
 extern int spim_return_value;     /* Value returned when spim exits */
+extern bool colored_output;        /* => show executed instructions with colors */
 /* Actual type of structure pointed to depends on X/terminal interface */
 extern port message_out, console_out, console_in;
 extern bool mapped_io;		/* => activate memory-mapped IO */

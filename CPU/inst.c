@@ -45,6 +45,13 @@
 #include "parser_yacc.h"
 #include "data.h"
 
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_BLUE    "\x1b[34m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+#define ANSI_COLOR_CYAN    "\x1b[36m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
 
 /* Local functions: */
 
@@ -698,7 +705,11 @@ format_an_inst (str_stream *ss, instruction *inst, mem_addr addr)
       return;
     }
 
-  ss_printf (ss, "[0x%08x]\t", addr);
+  if (colored_output) {
+		ss_printf (ss, ANSI_COLOR_RED "[0x%08x]\t" ANSI_COLOR_RESET, addr);
+	} else {
+		ss_printf (ss, "[0x%08x]\t", addr);
+	}
   if (inst == NULL)
     {
       ss_printf (ss, "<none>\n");
@@ -712,7 +723,12 @@ format_an_inst (str_stream *ss, instruction *inst, mem_addr addr)
       return;
     }
 
-  ss_printf (ss, "0x%08x  %s", (uint32)ENCODING (inst), entry->name);
+
+	if (colored_output) {
+		ss_printf (ss, ANSI_COLOR_GREEN "0x%08x" ANSI_COLOR_RESET "  %s", (uint32)ENCODING (inst), entry->name);
+	} else {
+		ss_printf (ss, "0x%08x  %s", (uint32)ENCODING (inst), entry->name);
+	}
   switch (entry->value2)
     {
     case BC_TYPE_INST:
@@ -836,14 +852,17 @@ format_an_inst (str_stream *ss, instruction *inst, mem_addr addr)
   if (SOURCE (inst) != NULL)
     {
       /* Comment is source line text of current line. */
-      int gap_length = 57 - (ss_length (ss) - line_start);
+      int gap_length = (colored_output ? 64 : 60) - (ss_length (ss) - line_start);
       for ( ; 0 < gap_length; gap_length -= 1)
 	{
 	  ss_printf (ss, " ");
 	}
 
-      ss_printf (ss, "; ");
-      ss_printf (ss, "%s", SOURCE (inst));
+      if (colored_output) {
+        ss_printf (ss, ANSI_COLOR_CYAN "; %s" ANSI_COLOR_RESET, SOURCE (inst));
+			} else {
+				ss_printf (ss, "; %s", SOURCE (inst));
+			}
     }
 
   ss_printf (ss, "\n");
