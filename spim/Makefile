@@ -331,3 +331,4 @@ parser_yacc.o: $(CPU_DIR)/data.h
 parser_yacc.o: $(CPU_DIR)/scanner.h
 parser_yacc.o: $(CPU_DIR)/parser.h
 stats.o: $(CPU_DIR)/stats.h
+stats.o: parser_yacc.h
