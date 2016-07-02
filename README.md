@@ -6,14 +6,15 @@
 (ソフトウェア)](http://www.fos.kuis.kyoto-u.ac.jp/~umatani/le3b/)
 
 ## Build & Run
-### OS X (Homebrew)
+### Homebrew (OS X)
 ```shell
 brew install --HEAD ymyzk/ymyzk/spim-for-kuis
+spim
 ```
 
 Note: `spim-for-kuis` conflicts with `spim`. If you have already installed `spim`, run `brew unlink spim` before installing `spim-for-kuis`.
 
-### Source
+### Source (Linux, Unix, Cygwin)
 ```shell
 cd ./spim/
 make spim install
