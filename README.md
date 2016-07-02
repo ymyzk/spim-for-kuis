@@ -8,7 +8,7 @@
 ## Build & Run
 ### Homebrew (OS X)
 ```shell
-brew install --HEAD ymyzk/ymyzk/spim-for-kuis
+brew install ymyzk/ymyzk/spim-for-kuis
 spim
 ```
 
