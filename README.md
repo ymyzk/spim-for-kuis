@@ -4,6 +4,7 @@
 
 [SPIM](http://spimsimulator.sourceforge.net) for [Hardware and Software Laboratory Project 3 (Software) / 計算機科学実験及び演習3
 (ソフトウェア)](http://www.fos.kuis.kyoto-u.ac.jp/~umatani/le3b/)
+spim-for-kuis is a fork of SPIM, and it implements some useful commands for testing and benchmarking.
 
 ## Build & Run
 ### Homebrew (OS X)
@@ -29,6 +30,8 @@ make DEST_DIR=~/.local spim install
 ```
 
 ## Additional options
+spim-for-kuis implements some useful options for testing & benchmarking.
+
 ### Show executed instructions
 You can see the executed instructions with `-show_instructions` option.
 
